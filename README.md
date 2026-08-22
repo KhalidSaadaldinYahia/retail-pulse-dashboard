@@ -35,4 +35,6 @@ A Power BI retail intelligence dashboard built from the U.S. Census Bureau Month
 
 ## Open the Power BI project
 
-Download `Retail_Pulse_PBIP.zip`, extract it, and open `RetailPulse.pbip` using a current version of Power BI Desktop.
+[Download the Power BI project archive](Retail_Pulse_Power_BI_Project.rar), extract it, and open `RetailPulse.pbip` using a current version of Power BI Desktop.
+
+Preview the completed dashboard: [open the PDF](Retail_Pulse_Dashboard.pdf).
