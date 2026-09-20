@@ -2,8 +2,6 @@
 
 A Power BI retail intelligence dashboard built from the U.S. Census Bureau Monthly Retail Trade Survey.
 
-![Retail Pulse dashboard preview](dashboard-preview.png)
-
 ## What the dashboard answers
 
 - Which retail categories contributed most to the latest complete-year sales movement?
@@ -25,6 +23,7 @@ A Power BI retail intelligence dashboard built from the U.S. Census Bureau Month
 - **Default executive comparison:** calendar year 2025 versus 2024, because 2026 is partial through May.
 - **Units:** source figures are millions of current U.S. dollars; executive values are converted to USD billions.
 - **Double-counting control:** the aggregate `Total Market` series is excluded from category-level contribution and ranking calculations.
+- **YoY growth:** current sales minus prior-year sales, divided by prior-year sales.
 
 ## Limitations
 
