@@ -180,7 +180,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'YOY CHANGE'"
+                  "Value": "'YOY CHANGE · USD MILLIONS'"
                 }
               }
             },

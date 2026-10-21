@@ -180,7 +180,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'PRIOR-YEAR SALES'"
+                  "Value": "'PRIOR-YEAR SALES · USD MILLIONS'"
                 }
               }
             },

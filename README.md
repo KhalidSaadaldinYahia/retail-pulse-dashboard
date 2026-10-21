@@ -4,7 +4,7 @@ A Power BI retail intelligence dashboard built from the U.S. Census Bureau Month
 
 ## What the dashboard answers
 
-- Which retail categories contributed most to the latest complete-year sales movement?
+- Which of the ten selected retail categories contributed most to the latest complete-year sales movement?
 - How did 2025 sales compare with the comparable 2024 base?
 - Which categories combine meaningful scale with positive or negative momentum?
 - How do category and segment trajectories differ across the available period?
@@ -18,17 +18,19 @@ A Power BI retail intelligence dashboard built from the U.S. Census Bureau Month
 
 ## Data and methodology
 
-- **Source:** U.S. Census Bureau, Monthly Retail Trade Survey.
+- **Source:** U.S. Census Bureau, Monthly Retail Trade Survey. [Monthly Retail Trade data](https://www.census.gov/retail/index.html). The supplied 847-row CSV snapshot does not include the exact Census download URL, API request, retrieval date, seasonal-adjustment flag or category-code mapping. Those details cannot be independently reconstructed from the current repository; verify them against the original extract before making a source-certified claim.
 - **Coverage:** January 2020 through May 2026.
 - **Default executive comparison:** calendar year 2025 versus 2024, because 2026 is partial through May.
 - **Units:** source figures are millions of current U.S. dollars; executive values are converted to USD billions.
-- **Double-counting control:** the aggregate `Total Market` series is excluded from category-level contribution and ranking calculations.
-- **YoY growth:** current sales minus prior-year sales, divided by prior-year sales.
+- **Double-counting control:** the aggregate `Total Market` series is excluded from every selected-category KPI, contribution and ranking calculation. The ten displayed categories are a subset, not an exhaustive decomposition of the market.
+- **YoY growth:** current sales minus the comparable prior-year sales, divided by that prior-year base. The extract starts in January 2020, so its 2020 prior-year and YoY fields are blank; no 2019 comparison is available.
+- **Coverage reconciliation:** 2025 selected-category sales are $8,420.167 billion versus $8,695.398 billion for the separately published `Total Market` aggregate. The difference is $275.231 billion (3.2% of the market); the selected categories are not intended to sum to the aggregate.
+- **Distance to complete-year peak:** selected/latest complete-year sales minus the highest annual sales in 2020–2025, divided by that peak. The 2026 partial year is excluded.
 
 ## Limitations
 
 - Recent Census estimates may be revised.
-- Values are seasonally adjusted but are not inflation-adjusted.
+- Values are current-dollar (not inflation-adjusted). The snapshot does not retain a seasonal-adjustment flag, so seasonal adjustment cannot be verified from these files.
 - Partial 2026 results must not be interpreted as a complete-year decline.
 - The dashboard is descriptive and does not establish causal relationships.
 
@@ -41,4 +43,4 @@ A Power BI retail intelligence dashboard built from the U.S. Census Bureau Month
 
 The CSV data snapshots are included under [`project/data`](project/data/). A `.pbix` was not generated because the PBIP source cannot be converted faithfully without opening and saving it in Power BI Desktop.
 
-**Aggregation correction:** The base DAX measures now exclude the aggregate `Total Market` row so it cannot be added to its component categories. Source CSV dollar values are in **USD millions**; divide by 1,000 to express them in **USD billions**. The 2025 category total is USD 8,420.167 billion. Some older PDF visuals still show Power BI auto-display suffixes applied to source-unit millions; use the corrected PBIP model and re-export the PDF for current values.
+**Aggregation correction:** The base DAX measures now exclude the aggregate `Total Market` row so it cannot be added to its component categories. Source CSV dollar values are in **USD millions**; divide by 1,000 to express them in **USD billions**. The 2025 selected-category total is USD 8,420.167 billion. The source-unit charts and tables retain USD millions; the cards and charts explicitly labeled USD billions divide those values by 1,000. The PDF must be re-exported from the corrected PBIP to show current results.

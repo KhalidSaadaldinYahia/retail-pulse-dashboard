@@ -180,7 +180,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'NET CHANGE · USD B'"
+                  "Value": "'SELECTED NET CHANGE · USD BILLIONS'"
                 }
               }
             },

@@ -23,11 +23,11 @@
                       "Entity": "RetailData"
                     }
                   },
-                  "Property": "Share of Selected Sales"
+                  "Property": "Distance to Complete-Year Peak"
                 }
               },
-              "queryRef": "RetailData.Share of Selected Sales",
-              "nativeQueryRef": "Share of Selected Sales"
+              "queryRef": "RetailData.Distance to Complete-Year Peak",
+              "nativeQueryRef": "Distance to Complete-Year Peak"
             }
           ]
         }
@@ -180,7 +180,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'DISTANCE TO PEAK'"
+                  "Value": "'DISTANCE TO COMPLETE-YEAR PEAK'"
                 }
               }
             },

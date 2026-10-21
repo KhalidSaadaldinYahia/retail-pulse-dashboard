@@ -2,22 +2,22 @@ table RetailData
 	lineageTag: d9c1f7d5-ce73-4107-8898-b6ba5fadfeef
 
 	/// Retail sales in the current filter context, USD millions
-	measure 'Total Sales' = CALCULATE(SUM(RetailData[Sales]), RetailData[Category] <> "Total Market")
+	measure 'Total Sales' = CALCULATE(SUM(RetailData[Sales]), KEEPFILTERS(RetailData[Category] <> "Total Market"))
 		formatString: #,0
 		lineageTag: a42c105f-8aa0-437d-aaee-00ddf02ffe75
 
 	/// Comparable prior-year retail sales in the current filter context
-	measure 'Prior Year Sales' = CALCULATE(SUM(RetailData[Prior Year Amount]), RetailData[Category] <> "Total Market")
+	measure 'Prior Year Sales' = CALCULATE(SUM(RetailData[Prior Year Amount]), KEEPFILTERS(RetailData[Category] <> "Total Market"))
 		formatString: #,0
 		lineageTag: bc3df59f-598c-4bea-90cb-f434b4d9dbc5
 
 	/// Current sales minus comparable prior-year sales
-	measure 'YoY Change' = CALCULATE(SUM(RetailData[YoY Delta]), RetailData[Category] <> "Total Market")
+	measure 'YoY Change' = CALCULATE(SUM(RetailData[YoY Delta]), KEEPFILTERS(RetailData[Category] <> "Total Market"))
 		formatString: #,0
 		lineageTag: 1602651b-d870-44e8-842f-e6940bb981b5
 
 	/// Retail sales amount represented by the current filter context
-	measure 'Sales Total' = CALCULATE(SUM(RetailData[Sales Amount]), RetailData[Category] <> "Total Market")
+	measure 'Sales Total' = CALCULATE(SUM(RetailData[Sales Amount]), KEEPFILTERS(RetailData[Category] <> "Total Market"))
 		formatString: #,0
 		lineageTag: 73fb7224-b8ef-4341-ae52-7b752bdc2576
 
@@ -36,23 +36,31 @@ table RetailData
 		formatString: 0.0%
 		lineageTag: fd840610-5891-4c95-9bb9-c65d81c643bf
 
+	/// Gap between the latest selected complete-year sales and the peak complete year since 2020
+	measure 'Distance to Complete-Year Peak' =
+		VAR CurrentYear = MIN(2025, MAX(RetailData[Year]))
+		VAR CurrentSales = CALCULATE([Total Sales], REMOVEFILTERS(RetailData[Year]), RetailData[Year] = CurrentYear)
+		VAR PeakSales = MAXX(FILTER(ALL(RetailData[Year]), RetailData[Year] >= 2020 && RetailData[Year] <= 2025), CALCULATE([Total Sales]))
+		RETURN DIVIDE(CurrentSales - PeakSales, PeakSales)
+		formatString: +0.0%;-0.0%;0.0%
+
 	/// Category share of the selected retail sales total
 	measure 'Share of Selected Sales' = DIVIDE([Sales Total], CALCULATE([Sales Total], ALLSELECTED(RetailData[Category])))
 		formatString: 0.0%
 		lineageTag: 5bf32d39-466a-4902-96d4-ca9432222b98
 
 	/// Sales for 2025, the latest complete calendar year in the extract
-	measure 'Latest Complete Sales' = CALCULATE(SUM(RetailData[Sales]), RetailData[Year] = 2025)
+	measure 'Latest Complete Sales' = CALCULATE(SUM(RetailData[Sales]), RetailData[Year] = 2025, KEEPFILTERS(RetailData[Category] <> "Total Market"))
 		formatString: #,0
 		lineageTag: 47fdc9d3-c5e1-4236-94fd-40f96b4be86d
 
 	/// Comparable 2024 sales carried on the 2025 rows
-	measure 'Latest Complete Prior Sales' = CALCULATE(SUM(RetailData[Prior Year Amount]), RetailData[Year] = 2025)
+	measure 'Latest Complete Prior Sales' = CALCULATE(SUM(RetailData[Prior Year Amount]), RetailData[Year] = 2025, KEEPFILTERS(RetailData[Category] <> "Total Market"))
 		formatString: #,0
 		lineageTag: b25d763a-17ff-4c53-a794-27ce3ee833bd
 
 	/// 2025 sales minus comparable 2024 sales
-	measure 'Latest Complete Change' = CALCULATE(SUM(RetailData[YoY Delta]), RetailData[Year] = 2025)
+	measure 'Latest Complete Change' = CALCULATE(SUM(RetailData[YoY Delta]), RetailData[Year] = 2025, KEEPFILTERS(RetailData[Category] <> "Total Market"))
 		formatString: #,0
 		lineageTag: 6c05c155-e4fd-4de4-85e6-8160655a0351
 
@@ -67,17 +75,17 @@ table RetailData
 		lineageTag: 62870580-36ce-48db-96fd-48739fc18bd9
 
 	/// Latest complete-year sales in USD billions, including the filtered total card context
-	measure 'Latest Complete Sales B' = DIVIDE(CALCULATE([Latest Complete Sales], RetailData[Category] <> "Total Market"), 1000)
+	measure 'Latest Complete Sales B' = DIVIDE(CALCULATE([Latest Complete Sales], KEEPFILTERS(RetailData[Category] <> "Total Market")), 1000)
 		formatString: $#,0.0
 		lineageTag: 7a5673f9-e985-4796-8708-e7a60119c89c
 
 	/// Prior complete-year sales in USD billions, excluding the aggregate Total Market row
-	measure 'Latest Complete Prior Sales B' = DIVIDE(CALCULATE([Latest Complete Prior Sales], RetailData[Category] <> "Total Market"), 1000)
+	measure 'Latest Complete Prior Sales B' = DIVIDE(CALCULATE([Latest Complete Prior Sales], KEEPFILTERS(RetailData[Category] <> "Total Market")), 1000)
 		formatString: $#,0.0
 		lineageTag: c9ee2706-0fcc-47ae-9572-b709a49008bc
 
 	/// Complete-year net movement in USD billions, excluding the aggregate Total Market row
-	measure 'Latest Complete Change B' = DIVIDE(CALCULATE([Latest Complete Change], RetailData[Category] <> "Total Market"), 1000)
+	measure 'Latest Complete Change B' = DIVIDE(CALCULATE([Latest Complete Change], KEEPFILTERS(RetailData[Category] <> "Total Market")), 1000)
 		formatString: $+#,0.0;$-#,0.0;$0.0
 		lineageTag: aca23f8a-dc16-4f7e-bc32-29ebe4bcbf9a
 
@@ -90,6 +98,10 @@ table RetailData
 	measure 'Sales Total B Display' = IF(SELECTEDVALUE(RetailData[Category]) = "Total Market", BLANK(), DIVIDE([Sales Total], 1000))
 		formatString: $#,0.0
 		lineageTag: db00f9fe-cb54-4f92-ad0e-0685e42b9349
+
+	/// Prior-year category base expressed in USD billions
+	measure 'Prior Year Sales B' = DIVIDE([Prior Year Sales], 1000)
+		formatString: $#,0.0
 
 	/// Year-over-year movement converted to USD billions with aggregate Total Market excluded
 	measure 'YoY Change B Display' = IF(SELECTEDVALUE(RetailData[Category]) = "Total Market", BLANK(), DIVIDE([YoY Change], 1000))

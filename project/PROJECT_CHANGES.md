@@ -8,3 +8,5 @@
 - Confirmed that the local README no longer references the missing `dashboard-preview.png`; the source package contains no preview asset.
 
 The corrected complete-year result is $8,420.167B in 2025 versus $8,105.059B in 2024: +$315.108B, or +3.8878%. A native PDF re-export still requires Power BI Desktop.
+
+- Removed unsupported 2020 prior-year and YoY values, aligned the 2025 growth card with ten selected categories, corrected the prior-year billion-unit chart and added a genuine complete-year peak measure.

@@ -42,11 +42,11 @@
                       "Entity": "RetailData"
                     }
                   },
-                  "Property": "Prior Year Sales"
+                  "Property": "Prior Year Sales B"
                 }
               },
-              "queryRef": "RetailData.Prior Year Sales",
-              "nativeQueryRef": "Prior Year Sales"
+              "queryRef": "RetailData.Prior Year Sales B",
+              "nativeQueryRef": "Prior Year Sales B"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "RetailData"
                   }
                 },
-                "Property": "Prior Year Sales"
+                "Property": "Prior Year Sales B"
               }
             },
             "direction": "Descending"
