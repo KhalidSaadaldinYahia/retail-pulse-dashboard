@@ -205,7 +205,7 @@ table RetailData
 		mode: import
 		source =
 				let
-					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/KhalidSaadaldinYahia/retail-pulse-dashboard/main/project/data/retail_sales_monthly.csv"), [Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/KhalidSaadaldinYahia/retail-pulse-dashboard/b79ca3348d32f9c9a182d4bf7a501aab949f7f63/project/data/retail_sales_monthly.csv"), [Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
 					PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 					Typed = Table.TransformColumnTypes(PromotedHeaders, {{"Category", type text}, {"Category Code", type text}, {"Year", Int64.Type}, {"Sales", Int64.Type}, {"Prior Year Amount", Int64.Type}, {"YoY Delta", Int64.Type}, {"Sales Amount", Int64.Type}, {"Segment", type text}, {"Monthly Change", Int64.Type}, {"MonthNumber", Int64.Type}, {"MonthStart", type date}})
 				in
