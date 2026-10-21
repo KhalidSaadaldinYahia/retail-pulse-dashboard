@@ -32,8 +32,13 @@ A Power BI retail intelligence dashboard built from the U.S. Census Bureau Month
 - Partial 2026 results must not be interpreted as a complete-year decline.
 - The dashboard is descriptive and does not establish causal relationships.
 
-## Open the Power BI project
+## Open and inspect the report
 
-[Download the Power BI project archive](Retail_Pulse_Power_BI_Project.rar), extract it, and open `RetailPulse.pbip` using a current version of Power BI Desktop.
+- [Preview the dashboard PDF](Retail_Pulse_Dashboard.pdf). A PDF is a static export; the `.pbip` project contains the interactive report.
+- [Browse the Power BI project](project/) or [download this repository as a ZIP](https://github.com/KhalidSaadaldinYahia/retail-pulse-dashboard/archive/refs/heads/main.zip). Keep the `project` folder intact after extracting.
+- Open [`RetailPulse.pbip`](project/RetailPulse.pbip) from the extracted `project` folder in a recent Power BI Desktop. The `.pbip` file references its sibling `.Report` and `.SemanticModel` folders; it cannot open by itself after downloading only that file.
+- On refresh, choose **Anonymous** access if Power BI requests credentials for `raw.githubusercontent.com`. The project reads the included CSV snapshot from this repository's public `main` branch. For offline refresh, replace each table query's `Web.Contents(...)` CSV source with `File.Contents(...)` pointing to its included local `project/data` CSV.
 
-Preview the completed dashboard: [open the PDF](Retail_Pulse_Dashboard.pdf).
+The CSV data snapshots are included under [`project/data`](project/data/). A `.pbix` was not generated because the PBIP source cannot be converted faithfully without opening and saving it in Power BI Desktop.
+
+**Aggregation correction:** The base DAX measures now exclude the aggregate `Total Market` row so it cannot be added to its component categories. Source CSV dollar values are in **USD millions**; divide by 1,000 to express them in **USD billions**. The 2025 category total is USD 8,420.167 billion. Some older PDF visuals still show Power BI auto-display suffixes applied to source-unit millions; use the corrected PBIP model and re-export the PDF for current values.
