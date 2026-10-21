@@ -36,14 +36,14 @@ A Power BI retail intelligence dashboard built from the U.S. Census Bureau Month
 
 ## Open and inspect the report
 
-- [Preview the dashboard PDF](Retail_Pulse_Dashboard.pdf). A PDF is a static export; the `.pbip` project contains the interactive report.
+- [Preview the dashboard PDF](Retail_Pulse_Dashboard.pdf). This PDF is a newly calculated, source-backed data preview; the `.pbip` project contains the interactive report.
 - [Browse the Power BI project](project/) or [download this repository as a ZIP](https://github.com/KhalidSaadaldinYahia/retail-pulse-dashboard/archive/refs/heads/main.zip). Keep the `project` folder intact after extracting.
 - Open [`RetailPulse.pbip`](project/RetailPulse.pbip) from the extracted `project` folder in a recent Power BI Desktop. The `.pbip` file references its sibling `.Report` and `.SemanticModel` folders; it cannot open by itself after downloading only that file.
 - On refresh, choose **Anonymous** access if Power BI requests credentials for `raw.githubusercontent.com`. The project reads the included CSV snapshot from this repository at fixed commit `b79ca3348d32`. For offline refresh, replace each table query's `Web.Contents(...)` CSV source with `File.Contents(...)` pointing to its included local `project/data` CSV.
 
 The CSV data snapshots are included under [`project/data`](project/data/). A `.pbix` was not generated because the PBIP source cannot be converted faithfully without opening and saving it in Power BI Desktop.
 
-**Aggregation correction:** The base DAX measures now exclude the aggregate `Total Market` row so it cannot be added to its component categories. Source CSV dollar values are in **USD millions**; divide by 1,000 to express them in **USD billions**. The 2025 selected-category total is USD 8,420.167 billion. The source-unit charts and tables retain USD millions; the cards and charts explicitly labeled USD billions divide those values by 1,000. The PDF must be re-exported from the corrected PBIP to show current results.
+**Aggregation correction:** The base DAX measures now exclude the aggregate `Total Market` row so it cannot be added to its component categories. Source CSV dollar values are in **USD millions**; divide by 1,000 to express them in **USD billions**. The 2025 selected-category total is USD 8,420.167 billion. The source-unit charts and tables retain USD millions; the cards and charts explicitly labeled USD billions divide those values by 1,000. The PDF preview has been rebuilt from the corrected committed CSV snapshot.
 
 ### Reproducible data snapshot
 
