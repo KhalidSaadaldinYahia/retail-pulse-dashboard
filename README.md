@@ -1,5 +1,9 @@
 # Retail Pulse
 
+## Download the complete project
+
+**To open this project:** [download the complete repository ZIP](https://github.com/KhalidSaadaldinYahia/retail-pulse-dashboard/archive/refs/heads/main.zip), extract it, and open `project/RetailPulse.pbip` in Power BI Desktop. Keep the `.Report`, `.SemanticModel`, and `data` folders beside the `.pbip` file. **Downloading the `.pbip` file alone will not produce a working report.** The included CSVs are the inspectable data snapshot; the model refreshes from a fixed online copy of those CSVs by default. The PDF is a static preview.
+
 A Power BI retail intelligence dashboard built from the U.S. Census Bureau Monthly Retail Trade Survey.
 
 ## What the dashboard answers
