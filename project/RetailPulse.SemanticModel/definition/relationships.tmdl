@@ -1,4 +1,0 @@
-relationship 8d7e6cec-fc36-4a22-b7ee-2884c16003f5
-	joinOnDateBehavior: datePartOnly
-	fromColumn: RetailData.'Month Start'
-	toColumn: LocalDateTable_c712f5ab-4779-439c-87d7-35d243771b65.Date
